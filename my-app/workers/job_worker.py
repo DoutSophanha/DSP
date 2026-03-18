@@ -11,8 +11,8 @@ if str(ROOT) not in sys.path:
 if str(BACKEND_DIR) not in sys.path:
     sys.path.insert(0, str(BACKEND_DIR))
 
-from app.core.config import QUEUE_KEY  # noqa: E402
-from app.core.redis_client import get_redis  # noqa: E402
+from backend.app.core.config import QUEUE_KEY  # noqa: E402
+from backend.app.core.redis_client import get_redis  # noqa: E402
 from workers.pipeline import process_job  # noqa: E402
 
 

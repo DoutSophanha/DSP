@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from app.core.config import DOWNLOADS_DIR, JOBS_DIR, WHISPER_MODEL
-from app.models.job_store import get_job, parse_job_record, update_job
+from backend.app.core.config import DOWNLOADS_DIR, JOBS_DIR, WHISPER_MODEL
+from backend.app.models.job_store import get_job, parse_job_record, update_job
 from services.subtitle_service import (
     segments_to_srt,
     segments_to_txt,

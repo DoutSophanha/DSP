@@ -1,0 +1,13 @@
+{
+  "include": [
+    "backend",
+    "services",
+    "workers"
+  ],
+  "extraPaths": [
+    "./backend",
+    "."
+  ],
+  "venvPath": "/opt/homebrew",
+  "pythonVersion": "3.13"
+}
