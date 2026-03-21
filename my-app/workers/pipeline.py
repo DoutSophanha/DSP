@@ -64,14 +64,32 @@ def process_job(job_id: str) -> None:
         translated_segments = translate_segments(source_segments, source_lang, target_lang)
 
         update_job(job_id, progress=82, step="exporting_files")
+        subtitle_pairs_path = out_dir / "subtitle_pairs.json"
+        subtitle_pairs = [
+            {
+                "start": source_segment["start"],
+                "end": source_segment["end"],
+                "original": source_segment["text"],
+                "translated": translated_segment["text"],
+            }
+            for source_segment, translated_segment in zip(source_segments, translated_segments)
+        ]
+        subtitle_pairs_path.write_text(
+            json.dumps(subtitle_pairs, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
         srt_path = segments_to_srt(translated_segments, out_dir / "subtitles.srt")
         vtt_output = segments_to_vtt(translated_segments, out_dir / "subtitles.vtt")
         txt_output = segments_to_txt(translated_segments, out_dir / "subtitles.txt")
+        source_txt_output = segments_to_txt(source_segments, out_dir / "source_subtitles.txt")
 
         output_files = {
             "srt": str(srt_path),
             "vtt": str(vtt_output),
             "txt": str(txt_output),
+            "source_txt": str(source_txt_output),
+            "subtitle_pairs": str(subtitle_pairs_path),
         }
 
         if payload.get("generate_mp3"):

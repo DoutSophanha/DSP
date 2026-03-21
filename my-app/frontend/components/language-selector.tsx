@@ -1,3 +1,6 @@
+import { Label } from "./ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+
 type Props = {
   sourceLang: string;
   targetLang: string;
@@ -13,40 +16,36 @@ const options = [
 export function LanguageSelector({ sourceLang, targetLang, onSourceChange, onTargetChange }: Props) {
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-      <div>
-        <label htmlFor="sourceLang" className="mb-2 block text-sm font-medium">
-          Source Language
-        </label>
-        <select
-          id="sourceLang"
-          value={sourceLang}
-          onChange={(event) => onSourceChange(event.target.value)}
-          className="w-full rounded-md border border-slate-300 px-3 py-2"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+      <div className="space-y-2">
+        <Label htmlFor="sourceLang">Source Language</Label>
+        <Select value={sourceLang} onValueChange={onSourceChange}>
+          <SelectTrigger id="sourceLang">
+            <SelectValue placeholder="Select source language" />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
-      <div>
-        <label htmlFor="targetLang" className="mb-2 block text-sm font-medium">
-          Target Language
-        </label>
-        <select
-          id="targetLang"
-          value={targetLang}
-          onChange={(event) => onTargetChange(event.target.value)}
-          className="w-full rounded-md border border-slate-300 px-3 py-2"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+      <div className="space-y-2">
+        <Label htmlFor="targetLang">Target Language</Label>
+        <Select value={targetLang} onValueChange={onTargetChange}>
+          <SelectTrigger id="targetLang">
+            <SelectValue placeholder="Select target language" />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

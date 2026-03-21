@@ -1,10 +1,10 @@
 # Offline Subtitle Pipeline (EN ↔ KM)
 
-Production-ready starter scaffold for a local/self-hosted subtitle platform using only free and open-source tools.
+Local/self-hosted subtitle platform using free and open-source tools.
 
 ## Stack
 
-- Frontend: Next.js (App Router) + Tailwind CSS
+- Frontend: Next.js (App Router) + Tailwind CSS (`frontend/`)
 - Backend: FastAPI
 - Processing: `yt-dlp`, `ffmpeg`, `faster-whisper`, `argos-translate`, optional `Coqui TTS`
 - Queue: Redis + simple Python worker
@@ -14,7 +14,7 @@ Production-ready starter scaffold for a local/self-hosted subtitle platform usin
 
 ```text
 my-app/
-	frontend/
+	frontend/               # only web UI app
 		app/
 		components/
 	backend/
@@ -35,7 +35,15 @@ my-app/
 		jobs/
 		downloads/
 		temp/
+	document/
 ```
+
+## Ownership and entry points
+
+- Root (`my-app/`) is orchestration/docs/config for the whole project.
+- Web UI runs only from `frontend/`.
+- API runs from `backend/`.
+- Worker runs from `workers/` (using backend virtualenv).
 
 ## API
 
@@ -81,14 +89,12 @@ cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 
 ### 3) Worker setup (new terminal)
 
 ```bash
-cd my-app
 source backend/.venv/bin/activate
 python workers/job_worker.py
 ```
@@ -97,7 +103,13 @@ python workers/job_worker.py
 
 ```bash
 cd frontend
-cp .env.local.example .env.local
+pnpm install
+pnpm dev
+```
+
+Or from root:
+
+```bash
 pnpm install
 pnpm dev
 ```

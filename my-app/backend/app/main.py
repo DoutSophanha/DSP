@@ -5,6 +5,7 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 
 from app.api.routes_jobs import router as job_router
+from app.api.routes_tool import router as tool_router
 from app.core.config import STORAGE_DIR
 
 app = FastAPI(title="Subtitle Pipeline API", version="0.1.0")
@@ -18,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(job_router)
+app.include_router(tool_router)
 
 
 @app.get("/health")
