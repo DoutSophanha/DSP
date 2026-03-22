@@ -34,7 +34,6 @@ Senior Full Stack Engineer
 System Architect
 
 Tech Stack You MUST use:
-
 Frontend: Next.js
 Backend: FastAPI
 Cache/Queue: Redis
