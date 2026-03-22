@@ -4,7 +4,6 @@ Date: 2026-03-18
 Project: Offline Subtitle Extract + Translate (Next.js + FastAPI)
 
 ## What I implemented
-
 ### 1) Full project scaffold
 
 Created the required structure in `my-app/`:
